@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+beers:
+  path: /beers
+  controller: App\Controller\BeersController::index
