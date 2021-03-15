@@ -2,31 +2,54 @@
 
 namespace App\Controller;
 
-use GuzzleHttp\Client;
+use App\Service\BeersSimple;
+use App\Service\BeersDetail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BeersController extends AbstractController
 {
-    const URL_API = 'https://api.punkapi.com/v2/beers?food=food';
-    //const URL = "https://api.punkapi.com/v2/beers?beer_name=food";
-
     /**
-     * @Route("/beers/{option}", name="beers")
+     * @Route("/beers/simple", name="beers")
      */
-    public function index($option)
+    public function simple(BeersSimple $beersSimple)
     {
-        //Prueba Petición a la API PunkApi desde el cliente HTTP Guzzle
+
+       /* //Prueba Petición a la API PunkApi desde el cliente HTTP Guzzle
         $clientGuzzle = new Client();
 
         $res = $clientGuzzle->request('GET', BeersController::URL_API);
         $dataBeers = $res->getBody();
 
-        $beers = json_decode($dataBeers, true);
+        $beers = json_decode($dataBeers, true);*/
+
+        $beers = $beersSimple->listBeers();
 
         return $this->render('beers/food.html.twig', [
-            'option' => $option,
+            'option' => 'simple',
+            'beers' => $beers
+        ]);
+    }
+
+    /**
+     * @Route("/beers/detail", name="beers")
+     */
+    public function detail(BeersDetail $beersDetail)
+    {
+
+        /* //Prueba Petición a la API PunkApi desde el cliente HTTP Guzzle
+         $clientGuzzle = new Client();
+
+         $res = $clientGuzzle->request('GET', BeersController::URL_API);
+         $dataBeers = $res->getBody();
+
+         $beers = json_decode($dataBeers, true);*/
+
+        $beers = $beersDetail->listBeers();
+
+        return $this->render('beers/food.html.twig', [
+            'option' => 'detail',
             'beers' => $beers
         ]);
     }

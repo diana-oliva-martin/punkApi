@@ -1,10 +1,10 @@
-<h1>List of beers</h1>
+<h1>List of beers {{ option }}</h1>
 
 {% for beer in beers %}
     <ul>
         <li>
             {{ beer.id  }} || {{ beer.name }} || {{ beer.description}}
-            {%  if option == 'extended' %}
+            {%  if option == 'detail' %}
                 || {{ beer.image_url  }} || {{ beer.tagline }} || {{ beer.first_brewed}}
             {% endif %}
         </li>
