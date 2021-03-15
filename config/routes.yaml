@@ -1,4 +1,4 @@
 # config/routes.yaml
 beers:
-  path: /beers
+  path: /beers/{option}
   controller: App\Controller\BeersController::index
