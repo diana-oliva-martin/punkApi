@@ -5,9 +5,16 @@
         <li>
             {{ beer.id  }} || {{ beer.name }} || {{ beer.description}}
             {%  if option == 'detail' %}
-                || {{ beer.image_url  }} || {{ beer.tagline }} || {{ beer.first_brewed}}
+                {%  if beer.image_url != '' %}
+                    || {{ beer.image_url  }}
+                {% endif %}
+                {%  if beer.tagline != '' %}
+                    || {{ beer.tagline  }}
+                {% endif %}
+                {%  if beer.first_brewed != '' %}
+                    || {{ beer.first_brewed  }}
+                {% endif %}
             {% endif %}
         </li>
     </ul>
-
 {% endfor %}
