@@ -13,18 +13,9 @@ class BeersController extends AbstractController
     /**
      * @Route("/beers/simple", name="beers")
      */
-    public function simple(BeersSimple $beersSimple)
+    public function simple(BeersSimple $beersSimple): Response
     {
-
-       /* //Prueba Petición a la API PunkApi desde el cliente HTTP Guzzle
-        $clientGuzzle = new Client();
-
-        $res = $clientGuzzle->request('GET', BeersController::URL_API);
-        $dataBeers = $res->getBody();
-
-        $beers = json_decode($dataBeers, true);*/
-
-        $beers = $beersSimple->listBeers();
+        $beers = $beersSimple->listBeersSimple();
 
         return $this->render('beers/food.html.twig', [
             'option' => 'simple',
@@ -35,18 +26,9 @@ class BeersController extends AbstractController
     /**
      * @Route("/beers/detail", name="beers")
      */
-    public function detail(BeersDetail $beersDetail)
+    public function detail(BeersDetail $beersDetail): Response
     {
-
-        /* //Prueba Petición a la API PunkApi desde el cliente HTTP Guzzle
-         $clientGuzzle = new Client();
-
-         $res = $clientGuzzle->request('GET', BeersController::URL_API);
-         $dataBeers = $res->getBody();
-
-         $beers = json_decode($dataBeers, true);*/
-
-        $beers = $beersDetail->listBeers();
+        $beers = $beersDetail->listBeersDetail();
 
         return $this->render('beers/food.html.twig', [
             'option' => 'detail',

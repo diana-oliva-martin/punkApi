@@ -2,24 +2,27 @@
 
 namespace App\Service;
 
+use App\Beers;
 use App\Controller\BeersController;
 use GuzzleHttp\Client;
 
 class BeersSimple
 {
-    const URL_API = 'https://api.punkapi.com/v2/beers?food=food';
-    //const URL = "https://api.punkapi.com/v2/beers?beer_name=food";
-
-    public static function listBeers()
+    public static function listBeersSimple()
     {
-        //Prueba Petición a la API PunkApi desde el cliente HTTP Guzzle
-        $clientGuzzle = new Client();
+        $beers = new Beers();
+        $simpleBeers = $beers->request();
 
-        $res = $clientGuzzle->request('GET', BeersSimple::URL_API);
-
-        $dataBeers = $res->getBody();
-
-        return json_decode($dataBeers, true);
-
+        $list_beers = array();
+        foreach ($simpleBeers as $beer) {
+            array_push($list_beers, array (
+                'id' => $beer['id'],
+                'name' => $beer['name'],
+                'description' => $beer['description']))
+            ;
+        }
+        return $list_beers;
     }
 }
+
+
